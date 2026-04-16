@@ -1,32 +1,87 @@
 /**
- * script.js - 塔罗占卜逻辑大脑 (动画增强版)
+ * script.js - 塔罗占卜逻辑
  */
 
-// 1. 抽牌主函数
+window.onload = function() {
+    resetGame();
+};
+
+function resetGame() {
+    // 隐藏页面
+    document.getElementById('verify-page').style.display = 'none';
+    document.getElementById('setup-area').style.display = 'none';
+    document.getElementById('result-page').style.display = 'none';
+    
+    // 只显示输入框
+    document.getElementById('question-container').style.display = 'block';
+    
+    // 清空之前的数据
+    document.getElementById('user-query').value = '';
+    document.getElementById('display-area').innerHTML = '';
+    document.getElementById('meaning-area').innerHTML = '';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+const constellations = ["白羊座", "金牛座", "双子座", "巨蟹座", "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "摩羯座", "水瓶座", "双鱼座"];
+    
+
+function generateRandomInfo() {
+    let nums = [];
+    while(nums.length < 3) {
+        let n = Math.floor(Math.random() * 9) + 1;
+        if(!nums.includes(n)) nums.push(n);
+    }
+
+// 随机 3 个星座
+    let cons = [];
+    while(cons.length < 3) {
+        let c = constellations[Math.floor(Math.random() * constellations.length)];
+        if(!cons.includes(c)) cons.push(c);
+    }
+
+    document.getElementById('random-numbers').innerText = nums.join(' 、');
+    document.getElementById('random-constellations').innerText = cons.join(' 、');
+}
+
+// 从问题页跳转到验证页
+function showVerifyPage() {
+    const query = document.getElementById('user-query').value.trim();
+    if (!query) {
+        alert("请先输入问题，以便链接能量");
+        return;
+    }
+    document.getElementById('question-container').style.display = 'none';
+    document.getElementById('verify-page').style.display = 'block';
+    generateRandomInfo(); 
+}
+
+// 确认匹配，跳转到抽牌按钮
+function showDrawButtons() {
+    document.getElementById('verify-page').style.display = 'none';
+    document.getElementById('setup-area').style.display = 'flex';
+}
+
+
+// 抽牌主函数
 function startDraw(count) {
-    const setupArea = document.getElementById('setup-area');
-    const resultPage = document.getElementById('result-page');
+    document.getElementById('setup-area').style.display = 'none'; // 抽牌后隐藏按钮
+    document.getElementById('result-page').style.display = 'flex'; // 显示结果
+
     const displayArea = document.getElementById('display-area');
     const meaningArea = document.getElementById('meaning-area');
-    const queryInput = document.getElementById('user-query');
-    const userQuestion = queryInput.value.trim(); // 如果没输入，显示默认值
+    const userQuestion = document.getElementById('user-query').value.trim();
+
 
     // 安全检查
     if (typeof tarotDeck === 'undefined' || tarotDeck.length === 0) {
         alert("牌池数据还没准备好，请检查 cards.js");
         return;
     }
-
-    // --- 逻辑处理 ---
-    // 1. 隐藏输入框所在的区域
-    document.getElementById('question-container').style.display = 'none';
-    document.getElementById('setup-area').style.display = 'none';
-    document.getElementById('result-page').style.display = 'flex';
     
     // 清空旧数据
     displayArea.innerHTML = '';
     meaningArea.innerHTML = '<h2>✨ 塔罗的启示 ✨</h2>';
-    meaningArea.style.display = 'none';
     if (userQuestion !== "") {
         meaningArea.innerHTML += `<div class="display-question">“ ${userQuestion} ”</div>`;
     }
@@ -45,7 +100,7 @@ function startDraw(count) {
         const positionText = isUpright ? "正位" : "逆位";
         const detailedMeaning = isUpright ? card.meaning_up : card.meaning_rev;
 
-        // --- ✨ 新增：牌阵位置标签逻辑 ---
+    
     let positionLabelHTML = '';
     // 只有当抽取 3 张牌（圣三角）时才显示标签
     if (count === 3) {
@@ -60,7 +115,7 @@ function startDraw(count) {
         positionLabelHTML = `<div class="card-position-label ${labelClass}"><span>${labelText}</span></div>`;
     }
 
-    // --- 修改：将标签加入卡片 HTML (注意：标签在 card-img-box 上面) ---
+    //  将标签加入卡片 HTML
     const cardHTML = `
     <div class="card-wrapper" style="animation-delay: ${index * 0.2}s">
         ${positionLabelHTML} 
@@ -77,11 +132,11 @@ function startDraw(count) {
 `;
     displayArea.innerHTML += cardHTML;
 
-    // --- 修改：解牌文字也加上位置信息，更清晰 ---
+    // 解牌文字加上位置信息
     let meaningTitleText = `${index + 1}. ${card.name}`;
     if (count === 3) {
         const labels = ['原因', '结果', '建议'];
-        meaningTitleText = `${labels[index]}：${card.name}`; // 例如：原因：愚者
+        meaningTitleText = `${labels[index]}：${card.name}`; 
     }
 
     const meaningHTML = `
@@ -97,19 +152,5 @@ function startDraw(count) {
     setTimeout(() => {
         meaningArea.style.display = 'block';
         meaningArea.scrollIntoView({ behavior: 'smooth' });
-    }, 1000); // 1秒后弹出文字，给卡片“飞”一会儿的时间
-}
-
-// 2. 重置函数：回到最初的选择界面
-function resetGame() {
-    document.getElementById('question-container').style.display = 'block';
-    document.getElementById('user-query').value = ''; // 清空输入框
-    const setupArea = document.getElementById('setup-area');
-    const resultPage = document.getElementById('result-page');
-    const displayArea = document.getElementById('display-area');
-    
-    resultPage.style.display = 'none';
-    setupArea.style.display = 'flex';
-    displayArea.innerHTML = ''; // 清空卡片，防止下次重叠
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // 回到顶部
+    }, 1000); // 1秒后弹出文字
 }

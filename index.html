@@ -2,15 +2,42 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>歪歪的塔罗实验室</title>
     <link rel="stylesheet" href="style.css">
     <meta name="referrer" content="no-referrer">
 </head>
+
 <body>
     <h1>✨ 歪歪的塔罗实验室 ✨</h1>
 
     <div id="question-container">
     <input type="text" id="user-query" placeholder="在此输入你的问题">
+    <button onclick="showVerifyPage()" class="next-btn">感应能量</button>
+</div>
+
+<div id="verify-page" style="display: none;" class="page">
+    <div class="verify-content">
+        <h2 class="verify-title">🔮 能量链接中...</h2>
+        <p class="verify-subtitle">以下信息是否和你或你所想之事有关联？</p>
+        
+        <div class="energy-blocks-container">
+            <div class="energy-block">
+                <div class="block-label">数字感应</div>
+                <div id="random-numbers" class="block-value"></div>
+            </div>
+            
+            <div class="energy-block">
+                <div class="block-label">星座联结</div>
+                <div id="random-constellations" class="block-value"></div>
+            </div>
+        </div>
+
+        <div class="verify-btns">
+            <button class="secondary-btn" onclick="generateRandomInfo()">不匹配，重新感应</button>
+            <button class="match-btn" onclick="showDrawButtons()">匹配，开始抽牌</button>
+        </div>
+    </div>
 </div>
     
     <div id="setup-area" class="controls">

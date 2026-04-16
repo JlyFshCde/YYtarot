@@ -1,4 +1,4 @@
-/* 1. 变量定义 */
+/* 变量定义 */
 :root {
     --gold: #f9d371;
     --bg-dark: #0f0f1a;
@@ -7,7 +7,7 @@
     --accent-red: #ff4d6d;
 }
 
-/* 2. 页面基础设置：全屏居中 */
+/* 页面基础设置：全屏居中 */
 body {
     background-color: var(--bg-dark);
     color: var(--text-white);
@@ -22,7 +22,7 @@ body {
     text-align: center;
 }
 
-/* 3. 标题样式 */
+/* 标题样式 */
 h1 {
     color: var(--gold);
     text-shadow: 0 0 15px rgba(249, 211, 113, 0.4);
@@ -39,11 +39,11 @@ h1 {
     width: 90%;
     max-width: 500px;
 
-    /* ✨ 关键：这行代码会让块级元素在父容器中水平居中 */
+    /* 块级元素在父容器中水平居中 */
     margin-left: auto;
     margin-right: auto;
     
-    /* 确保内部容器也是居中的 */
+    /* 内部容器居中 */
     display: flex;
     justify-content: center;
 }
@@ -60,7 +60,7 @@ h1 {
     text-align: center;
     outline: none;
     transition: all 0.3s ease;
-    box-sizing: border-box; /* 确保 padding 不会撑破宽度 */
+    box-sizing: border-box;
 }
 
 #user-query:focus {
@@ -68,7 +68,7 @@ h1 {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* 修改结果页问题显示的样式 */
+/* 结果页问题显示的样式 */
 .display-question {
     color: var(--gold);
     font-style: italic;
@@ -77,19 +77,19 @@ h1 {
     opacity: 0.9;
 }
 
-/* 按钮容器：负责按钮的布局和间距 */
+/* 按钮容器 */
 #setup-area {
-    display: flex;           /* 启用弹性布局 */
+    display: none;           /* 启用弹性布局 */
     flex-direction: column;  /* 让按钮竖着排，如果是 row 就是横着排 */
     align-items: center;     /* 水平居中 */
     justify-content: center; /* 垂直居中 */
-    gap: 20px;              /* ✨ 核心：这就是你要的按钮之间的间隔距离 */
+    gap: 20px;              /* 按钮之间的间隔距离 */
     margin-top: 20px;        /* 按钮组距离上方标题的额外距离 */
 }
 
 
-/* 4. 按钮统一样式 (选择按钮 & 重新抽牌按钮) */
-.controls button, .retry-btn {
+/* 按钮统一样式 (选择按钮 & 重新抽牌按钮) */
+.controls button, .retry-btn, .next-btn {
     background: transparent;
     color: var(--gold);
     border: 3px solid var(--gold);
@@ -104,16 +104,18 @@ h1 {
     margin: 15px auto;   /* 按钮上下间距 */
     display: block;      /* 确保居中生效 */
     outline: none;
+    margin-top: 20px;
+    max-width: 90%;
 }
 
-.controls button:hover, .retry-btn:hover {
+.controls button:hover, .retry-btn :hover {
     background: var(--gold);
     color: var(--bg-dark);
     box-shadow: 0 0 30px rgba(249, 211, 113, 0.4);
     transform: scale(1.05);
 }
 
-/* 5. 抽牌结果容器 */
+/* 抽牌结果容器 */
 #result-page {
     width: 100%;
     display: none;       /* 初始隐藏 */
@@ -130,7 +132,20 @@ h1 {
     margin-bottom: 40px;
 }
 
-/* 6. 单个卡片展示效果 */
+@media (max-width: 600px) {
+    .card-wrapper {
+        width: 45%; 
+        margin-bottom: 40px;
+    }
+    
+    .card-position-label {
+        font-size: 0.8rem;
+        padding: 4px 12px;
+        top: -40px;
+    }
+}
+
+/* 单个卡片展示效果 */
 .card-wrapper {
     width: 200px; /* 统一宽度 */
     display: flex;
@@ -147,13 +162,13 @@ h1 {
     transform: translateX(-50%); /* 水平居中 */
     z-index: 10;        /* 确保在卡片最上面 */
     
-    /* ✨ 核心：确保容器本身有足够的空间并强制居中 */
+    /* 容器本身有足够的空间并强制居中 */
     display: inline-flex;    /* 根据内容自动调整宽度 */
     align-items: center;     /* 垂直居中 */
     justify-content: center; /* 水平居中 */
-    min-width: 60px;         /* 给一个最小宽度，防止文字太挤 */
+    min-width: 60px;         /* 防止文字太挤 */
 
-    /* ✨ 统一字体大小 */
+    /* 统一字体大小 */
     font-size: 1rem;    /* 使用 rem 确保三者一致 */
     font-family: 'STKaiti', '楷体', serif;
     font-weight: bold;
@@ -186,10 +201,10 @@ h1 {
 
 .card-img-box {
     width: 100%;
-    aspect-ratio: 2 / 3.5;  /* 强制设定比例，塔罗牌通常是这个比例 */
+    aspect-ratio: 2 / 3.5; 
     border: 3px solid var(--gold);
     border-radius: 12px;
-    overflow: hidden;       /* 裁剪多余部分 */
+    overflow: hidden; 
     background: #000;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     display: flex;
@@ -200,7 +215,7 @@ h1 {
 .card-img-box img {
     width: 100%;
     height: 100%;
-    object-fit: cover;      /* 核心代码：像裁剪头像一样填满格子，防止比例被拉伸 */
+    object-fit: cover;
     display: block;
 }
 
@@ -214,9 +229,9 @@ h1 {
     padding: 10px;
     background: rgba(249, 211, 113, 0.1);
     border-radius: 8px;
-    width: 100%;           /* 宽度与盒子一致 */
-    box-sizing: border-box; /* 防止 padding 撑大盒子 */
-    min-height: 80px;      /* 给文字一个最小高度，防止名字长短不一导致对齐问题 */
+    width: 100%;           
+    box-sizing: border-box; 
+    min-height: 80px;      
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -236,7 +251,7 @@ h1 {
     font-weight: bold;
 }
 
-/* 7. 详细文字解释框 */
+/* 详细文字解释框 */
 #meaning-area {
     width: 90%;
     max-width: 800px;
@@ -244,19 +259,19 @@ h1 {
     padding: 30px;
     border-radius: 15px;
     border-top: 2px solid var(--gold);
-    margin: 20px auto 40px auto; /* 上 左右 下 间距，确保居中 */
-    text-align: left; /* 解释文字左对齐方便阅读 */
+    margin: 20px auto 40px auto; 
+    text-align: left; 
     line-height: 1.8;
 }
 
 #meaning-area h2 {
-    text-align: center;      /* 确保标题居中 */
-    color: var(--gold);      /* 保持金色 */
-    margin-top: 0;           /* 消除顶部多余间距 */
-    margin-bottom: 50px;     /* ✨ 增加这个数值，距离就会变大 */
+    text-align: center;      
+    color: var(--gold);      
+    margin-top: 0;           
+    margin-bottom: 50px;     
     font-size: 1.8rem;
-    border-bottom: 1px solid rgba(249, 211, 113, 0.3); /* 可选：加一条淡淡的分割线 */
-    padding-bottom: 15px;    /* 分割线与文字的距离 */
+    border-bottom: 1px solid rgba(249, 211, 113, 0.3); 
+    padding-bottom: 15px;    
 }
 
 .meaning-item {
@@ -266,12 +281,12 @@ h1 {
     border-bottom: 1px dashed rgba(249, 211, 113, 0.2);
     padding-bottom: 15px;
     border-radius: 12px;
-/* ✨ 核心：开启垂直居中 */
+/* 垂直居中 */
     display: flex;
-    flex-direction: column;  /* 让标题和正文上下排列 */
-    justify-content: center; /* 在纵向上居中内容 */
-    min-height: 60px;       /* ✨ 重要：必须设定一个最小高度，垂直居中才有意义 */
-    text-align: center;      /* 如果你希望文字水平也居中，保留这一行 */
+    flex-direction: column;  
+    justify-content: center; 
+    min-height: 60px;       
+    text-align: center;      
 }
 
 .meaning-item h3 {
@@ -280,11 +295,11 @@ h1 {
     margin-top: 0;
     margin-bottom: 20px;
     
-    /* ✨ 视觉增强：左边加一条金色的竖线 */
+    /* 左边加一条金色的竖线 */
     border-left: 4px solid var(--gold);
     padding-left: 15px;
     
-    /* ✨ 视觉增强：底部加一条淡淡的渐变线 */
+    /* 底部加一条淡淡的渐变线 */
     border-bottom: 1px solid rgba(249, 211, 113, 0.2);
     padding-bottom: 10px;
     
@@ -293,7 +308,7 @@ h1 {
     letter-spacing: 1px;
 }
 
-/* 优化后的解释正文 */
+/* 解释正文 */
 .meaning-text {
     color: white;         /* 文字颜色稍微调暗一点，与标题拉开差距 */
     line-height: 1.8;       /* 增加行间距，更易阅读 */
@@ -303,8 +318,177 @@ h1 {
     padding: 0 5px;
 }
 
-/* 8. 飞入动画 */
+/* 飞入动画 */
 @keyframes flyIn {
     0% { opacity: 0; transform: translateY(100px) scale(0.8); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.verify-page {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid var(--gold);
+}
+
+.random-info-box {
+    margin: 30px 0;
+    font-family: 'STKaiti', '楷体', serif;
+}
+
+.info-item {
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin: 15px 0;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px rgba(249, 211, 113, 0.5);
+}
+
+.verify-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;  /* 水平居中 */
+    align-items: center;      /* 垂直居中 */
+    gap: 60px;               /* 按钮之间的间距 */
+    flex-wrap: wrap;         
+    margin-top: 40px;
+    width: 100%;             /* 占满容器宽度 */
+}
+
+
+.next-btn {
+    margin-top: 60px !important;
+}
+
+/* 验证页主容器 */
+.verify-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 20px;
+}
+
+.verify-title {
+    color: var(--gold);
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(249, 211, 113, 0.3);
+}
+
+.verify-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+/* 分块容器布局 */
+.energy-blocks-container {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    margin-bottom: 50px;
+    flex-wrap: wrap; /* 适配手机屏幕 */
+}
+
+@media (max-width: 600px) {
+    .energy-blocks-container {
+        flex-direction: column; 
+        align-items: center;
+    }
+}
+
+/* 单个能量块样式 */
+.energy-block {
+    flex: 1;
+    min-width: 280px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(249, 211, 113, 0.2);
+    border-top: 3px solid var(--gold); /* 顶部金边线 */
+    padding: 30px 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 90%;
+}
+
+.energy-block:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+    background: rgba(249, 211, 113, 0.05);
+}
+
+.block-label {
+    font-size: 1.2rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.block-value {
+    font-size: 1.4rem;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.secondary-btn, .match-btn {
+    width: 280px;            /* 统一宽度 */
+    height: 55px;            /* 统一高度 */
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;     /* 统一圆角 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;           /* 内部文字居中 */
+    align-items: center;
+    justify-content: center;
+    font-family: 'STKaiti', '楷体', serif;
+    box-sizing: border-box;  
+    outline: none;
+    margin: 0;
+    max-width: 90%;            
+}
+
+.match-btn {
+    background: var(--gold);
+    color: var(--bg-dark);
+    border: 2px solid var(--gold); 
+    box-shadow: 0 0 15px rgba(249, 211, 113, 0.3);
+}
+
+.match-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(249, 211, 113, 0.5);
+}
+
+.secondary-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.secondary-btn:hover {
+    border-color: white;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 600px) {
+    .verify-btns {
+        gap: 15px; /* 缩小按钮间距 */
+    }
+
+    .secondary-btn, .match-btn {
+        width: 80%; /* 手机端让按钮占屏幕宽度的 80% */
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    /* 手机端让按钮垂直排列，这样空间更充裕 */
+    .verify-btns {
+        flex-direction: column; 
+    }
 }

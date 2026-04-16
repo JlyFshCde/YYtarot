@@ -1,5 +1,5 @@
 /**
- * cards.js - 78张塔罗牌完整数据库 (高稳定性链接版)
+ * cards.js - 78张塔罗牌完整数据库
  */
 
 const tarotDeck = [
@@ -71,7 +71,7 @@ const tarotDeck = [
     { id: 58, name: "宝剑九 (Nine of Swords)",meaning_up:"焦虑、噩梦、绝望。<br>意味着精神压力大、失眠、罪恶感或因过度担忧而感到绝望。",meaning_rev:" 缓解压力、发现真相。<br>意味着从痛苦中“清醒”或寻求改变的转折点，虽然困难仍在，但你有了正视恐惧和强化内心的意愿，需要放下无谓的揣测。",img:"https://fastly.jsdelivr.net/gh/metabismuth/tarot-json@master/cards/s09.jpg"},
     { id: 59, name: "宝剑十 (Ten of Swords)",meaning_up:"惨痛结束、谷底、背叛。<br>意味着已经达到谷底，情况不会再恶化，也是转折的开始。",meaning_rev:" 重生、最坏已过。<br>意味着最坏的时刻已过，伤痛开始平复。",img:"https://fastly.jsdelivr.net/gh/metabismuth/tarot-json@master/cards/s10.jpg"},
     { id: 60, name: "宝剑侍从 (Page of Swords)",meaning_up:"警觉、好辩、新消息。<br>意味着需要保持警惕和逻辑，分析形势并利用信息优势，可能预示着有新的思想启发或通信到来。",meaning_rev:" 轻率、流言蜚语。<br>意味着根基不稳、冲动急躁，难以做出明智决定。",img:"https://fastly.jsdelivr.net/gh/metabismuth/tarot-json@master/cards/s11.jpg"},
-    { id: 61, name: "宝剑骑士 (Knight of Swords)",meaning_up:"冲劲、才华、急躁。<br>意味着正全力以赴冲向目标，思维敏捷，能以冷静理性的态度处理棘手问题，但需警惕急躁与冲突。",meaning_rev:" 鲁莽、破坏力。<br>意味着诸事不顺、激烈的冲突或盲目地为反对而反对。",img:"https://fastly.jsdelivr.net/gh/metabismuth/tarot-json@master/cards/s12.jpg"},
+    { id: 61, name: "宝剑骑士 (Knight of Swords)",meaning_up:"冲劲、才华、急躁。<br>意味着正全力以赴冲向目标，思维敏捷，能以冷静理性的态度（百度百科）处理棘手问题，但需警惕急躁与冲突。",meaning_rev:" 鲁莽、破坏力。<br>意味着诸事不顺、激烈的冲突或盲目地为反对而反对。",img:"https://fastly.jsdelivr.net/gh/metabismuth/tarot-json@master/cards/s12.jpg"},
     { id: 62, name: "宝剑皇后 (Queen of Swords)",meaning_up:"理智、诚实、公正。<br>意味着在目前的情境中，你需要依靠理智而非情感行事，坚定立场，追求真理，保持高效的行动力。",meaning_rev:" 冷漠、刻薄、偏见。<br>意味着因压力导致的尖刻冷漠、非理性决策、心胸狭隘或逃避现实，此时往往深陷负面情绪。",img:"https://fastly.jsdelivr.net/gh/metabismuth/tarot-json@master/cards/s13.jpg"},
     { id: 63, name: "宝剑国王 (King of Swords)",meaning_up:"分析、权威、公正。<br>意味着在爱情中注重理性沟通，工作上具备统筹规划与专业执行能力。",meaning_rev:" 残酷、暴虐、严苛。<br>意味着沟通障碍、不可理喻、冷酷或利用才智作恶。",img:"https://fastly.jsdelivr.net/gh/metabismuth/tarot-json@master/cards/s14.jpg"},
 
