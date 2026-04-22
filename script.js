@@ -107,9 +107,9 @@ function startDraw(count) {
         let labelText = '';
         let labelClass = '';
         switch (index) {
-            case 0: labelText = '原因'; labelClass = 'label-cause'; break;
-            case 1: labelText = '结果'; labelClass = 'label-result'; break;
-            case 2: labelText = '建议'; labelClass = 'label-advice'; break;
+            case 0: labelText = '过去/原因'; labelClass = 'label-cause'; break;
+            case 1: labelText = '现在/结果'; labelClass = 'label-result'; break;
+            case 2: labelText = '未来/建议'; labelClass = 'label-advice'; break;
         }
         // 生成标签的 HTML
         positionLabelHTML = `<div class="card-position-label ${labelClass}"><span>${labelText}</span></div>`;
@@ -135,7 +135,7 @@ function startDraw(count) {
     // 解牌文字加上位置信息
     let meaningTitleText = `${index + 1}. ${card.name}`;
     if (count === 3) {
-        const labels = ['原因', '结果', '建议'];
+        const labels = ['过去/原因', '现在/结果', '未来/建议'];
         meaningTitleText = `${labels[index]}：${card.name}`; 
     }
 
